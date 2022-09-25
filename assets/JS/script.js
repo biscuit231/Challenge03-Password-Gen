@@ -17,27 +17,28 @@ function generatePassword() {
 
   // Prompt user for length of password 8 < 128 and validates it
   userChoice = parseInt(prompt("Please enter character length of password: (Between 8 and 128 Characters)"));
-    if (!userChoice) {
-        alert("Please input a value!") 
-        generatePassword();
-      } else if (userChoice < 8 || userChoice > 128) {  
-        alert("Please input a value between 8 and 128.");
-        generatePassword();
-      } else {
-        specChar = confirm("Would you like to include Special Characters?");
-        upperChar = confirm("Would you like to include Uppercase Characters?");
-        lowerChar = confirm("Would you like to include Lowercase Characters?");
-        numChar = confirm("Would you like to include Numbers?");
-    }
+    while (!userChoice || userChoice < 8 || userChoice > 128) {
+        alert("Please input a number between 8 and 128.");
+        userChoice = parseInt(prompt("Please enter character length of password: (Between 8 and 128 Characters)"));
+      }  
+
+      specChar = confirm("Would you like to include Special Characters?");
+      upperChar = confirm("Would you like to include Uppercase Characters?");
+      lowerChar = confirm("Would you like to include Lowercase Characters?");
+      numChar = confirm("Would you like to include Numbers?");
+    
 
     // If all are negative options
-    if (!specChar && !upperChar && !lowerChar && !numChar) {
+    while (!specChar && !upperChar && !lowerChar && !numChar) {
       selections = alert('You must select at least 1 criteria!');
-      generatePassword();
+      specChar = confirm("Would you like to include Special Characters?");
+      upperChar = confirm("Would you like to include Uppercase Characters?");
+      lowerChar = confirm("Would you like to include Lowercase Characters?");
+      numChar = confirm("Would you like to include Numbers?");
     }
 
     // If all are positive options
-    else if (specChar && upperChar && lowerChar && numChar) {
+    if (specChar && upperChar && lowerChar && numChar) {
       selections = spec.concat(uppers, lowers, numbers);
     }
 
